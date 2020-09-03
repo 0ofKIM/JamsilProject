@@ -12,7 +12,7 @@ import UIKit
 import VideoToolbox
 
 public protocol VideoCaptureDelegate: class {
-    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame: CVPixelBuffer, timestamp: CMTime)
+    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame: CVPixelBuffer, timestamp: CMTime, image: CGImage?)
 }
 
 public class VideoCapture: NSObject {
@@ -108,8 +108,11 @@ extension VideoCapture: AVCaptureVideoDataOutputSampleBufferDelegate {
         if deltaTime >= CMTimeMake(value: 1, timescale: Int32(fps)) {
             lastTimestamp = timestamp
         }
+
+        var image: CGImage?
         if let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
-            delegate?.videoCapture(self, didCaptureVideoFrame: imageBuffer, timestamp: timestamp)
+            VTCreateCGImageFromCVPixelBuffer(imageBuffer, options: nil, imageOut: &image)
+            delegate?.videoCapture(self, didCaptureVideoFrame: imageBuffer, timestamp: timestamp, image: image)
         }
     }
     

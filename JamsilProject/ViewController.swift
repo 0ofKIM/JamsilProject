@@ -16,24 +16,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var videoPreview: UIView!
     var videoCapture: VideoCapture!
     
-    private var poseNetMLModel: MLModel?
+    private var poseNet: PoseNet?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         do {
-            try self.setUpModel()
+            poseNet = try PoseNet()
         } catch {
-            print(error)
+            fatalError("Failed to load model. \(error.localizedDescription)")
         }
-       
+        
         self.setUpCamera()
     }
 
-    func setUpModel() throws {
-        poseNetMLModel = try PoseNetMobileNet075S16FP16(configuration: .init()).model
-    }
-    
     func setUpCamera() {
         videoCapture = VideoCapture()
         videoCapture.delegate = self
@@ -56,7 +52,9 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: VideoCaptureDelegate {
-    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame: CVPixelBuffer, timestamp: CMTime) {
-        
+    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame: CVPixelBuffer, timestamp: CMTime, image: CGImage?) {
+        if let value = image {
+            poseNet?.predict(image: value)
+        }
     }
 }
