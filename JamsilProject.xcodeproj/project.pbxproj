@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BE82A962500D2AF007A2435 /* AVCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE82A952500D2AF007A2435 /* AVCapture.swift */; };
+		4BE82AA62500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4BE82AA52500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel */; };
 		FB59008824F0E06000591CAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59008724F0E06000591CAB /* AppDelegate.swift */; };
 		FB59008A24F0E06000591CAB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59008924F0E06000591CAB /* SceneDelegate.swift */; };
 		FB59008C24F0E06000591CAB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59008B24F0E06000591CAB /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4BE82A952500D2AF007A2435 /* AVCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCapture.swift; sourceTree = "<group>"; };
+		4BE82AA52500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PoseNetMobileNet075S16FP16.mlmodel; sourceTree = "<group>"; };
 		FB59008424F0E06000591CAB /* JamsilProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JamsilProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB59008724F0E06000591CAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB59008924F0E06000591CAB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4BE82A972500D2C5007A2435 /* AVCapture */ = {
+			isa = PBXGroup;
+			children = (
+				4BE82A952500D2AF007A2435 /* AVCapture.swift */,
+				4BE82AA52500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel */,
+			);
+			path = AVCapture;
+			sourceTree = "<group>";
+		};
 		FB59007B24F0E05F00591CAB = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +72,7 @@
 				FB59008724F0E06000591CAB /* AppDelegate.swift */,
 				FB59008924F0E06000591CAB /* SceneDelegate.swift */,
 				FB59008B24F0E06000591CAB /* ViewController.swift */,
+				4BE82A972500D2C5007A2435 /* AVCapture */,
 				FB59008D24F0E06000591CAB /* Main.storyboard */,
 				FB59009024F0E06400591CAB /* Assets.xcassets */,
 				FB59009224F0E06400591CAB /* LaunchScreen.storyboard */,
@@ -139,7 +153,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB59008C24F0E06000591CAB /* ViewController.swift in Sources */,
+				4BE82A962500D2AF007A2435 /* AVCapture.swift in Sources */,
 				FB59008824F0E06000591CAB /* AppDelegate.swift in Sources */,
+				4BE82AA62500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel in Sources */,
 				FB59008A24F0E06000591CAB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,13 +301,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 833DD2H3KD;
+				DEVELOPMENT_TEAM = PU7DWTK8ZH;
 				INFOPLIST_FILE = JamsilProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jamsil.JamsilProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamsil.JamsilProjectFirst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -303,13 +319,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 833DD2H3KD;
+				DEVELOPMENT_TEAM = PU7DWTK8ZH;
 				INFOPLIST_FILE = JamsilProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jamsil.JamsilProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamsil.JamsilProjectFirst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
