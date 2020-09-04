@@ -13,7 +13,7 @@ import Vision
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var customView: UIView!
+    var customView: UIView = UIView(frame: CGRect(x: 50, y: 50, width: 10, height: 10))
     @IBOutlet weak var videoPreview: UIView!
     var videoCapture: VideoCapture!
     
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        customView.backgroundColor = .red
         do {
             poseNet = try PoseNet()
         } catch {
@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         self.poseNet?.delegate = self
         
         self.setUpCamera()
+        self.view.addSubview(customView)
     }
 
     func setUpCamera() {
@@ -74,15 +75,16 @@ extension ViewController: PoseNetDelegate {
         
         let poses = [poseBuilder.pose]
         
-        for (index, pose) in poses.enumerated() where pose.confidence > 0.9 {
-            for joint in pose.joints {
+        for (index, pose) in poses.enumerated() {
+            for joint in pose.joints where joint.value.isValid {
                 
                 //print(joint.value.confidence)
                 //print("\(index) : \(joint.value.name) : \(joint.value.position)")
                 if joint.value.name == .nose {
-                    DispatchQueue.main.async {
-                        print("\(index) : \(joint.value.name) : \(joint.value.position)")
-                        self.customView.frame = CGRect(x: joint.value.position.x, y: joint.value.position.y, width: 10, height: 10)
+                    print("\(index) : \(joint.value.name) : \(joint.value.position)")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        self.customView.center = joint.value.position
+                        self.customView.layoutIfNeeded()
                     }
                 }
 
