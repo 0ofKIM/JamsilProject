@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B8335932501D71E00A55897 /* PoseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8335922501D71D00A55897 /* PoseBuilder.swift */; };
+		4B8335952501DBC500A55897 /* Joint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8335942501DBC500A55897 /* Joint.swift */; };
+		4B8335972501DDD100A55897 /* Pose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8335962501DDD100A55897 /* Pose.swift */; };
 		4BE82A962500D2AF007A2435 /* AVCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE82A952500D2AF007A2435 /* AVCapture.swift */; };
 		4BE82AA62500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4BE82AA52500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel */; };
 		4BE82AA92500E414007A2435 /* PosNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE82AA82500E414007A2435 /* PosNet.swift */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B8335922501D71D00A55897 /* PoseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseBuilder.swift; sourceTree = "<group>"; };
+		4B8335942501DBC500A55897 /* Joint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joint.swift; sourceTree = "<group>"; };
+		4B8335962501DDD100A55897 /* Pose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pose.swift; sourceTree = "<group>"; };
 		4BE82A952500D2AF007A2435 /* AVCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCapture.swift; sourceTree = "<group>"; };
 		4BE82AA52500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PoseNetMobileNet075S16FP16.mlmodel; sourceTree = "<group>"; };
 		4BE82AA82500E414007A2435 /* PosNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosNet.swift; sourceTree = "<group>"; };
@@ -43,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B8335912501D70700A55897 /* PoseBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				4B8335922501D71D00A55897 /* PoseBuilder.swift */,
+			);
+			path = PoseBuilder;
+			sourceTree = "<group>";
+		};
 		4BE82A972500D2C5007A2435 /* AVCapture */ = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +76,8 @@
 		4BE82AAA2500E896007A2435 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4B8335962501DDD100A55897 /* Pose.swift */,
+				4B8335942501DBC500A55897 /* Joint.swift */,
 				4BE82AA52500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel */,
 			);
 			path = Model;
@@ -89,6 +105,7 @@
 				FB59008724F0E06000591CAB /* AppDelegate.swift */,
 				FB59008924F0E06000591CAB /* SceneDelegate.swift */,
 				FB59008B24F0E06000591CAB /* ViewController.swift */,
+				4B8335912501D70700A55897 /* PoseBuilder */,
 				4BE82AAA2500E896007A2435 /* Model */,
 				4BE82AA72500E406007A2435 /* PoseNetModel */,
 				4BE82A972500D2C5007A2435 /* AVCapture */,
@@ -173,8 +190,11 @@
 			files = (
 				FB59008C24F0E06000591CAB /* ViewController.swift in Sources */,
 				4BE82A962500D2AF007A2435 /* AVCapture.swift in Sources */,
+				4B8335952501DBC500A55897 /* Joint.swift in Sources */,
 				4BE82AA92500E414007A2435 /* PosNet.swift in Sources */,
+				4B8335932501D71E00A55897 /* PoseBuilder.swift in Sources */,
 				FB59008824F0E06000591CAB /* AppDelegate.swift in Sources */,
+				4B8335972501DDD100A55897 /* Pose.swift in Sources */,
 				4BE82AA62500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel in Sources */,
 				FB59008A24F0E06000591CAB /* SceneDelegate.swift in Sources */,
 			);
