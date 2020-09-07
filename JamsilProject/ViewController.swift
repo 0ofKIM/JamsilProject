@@ -13,7 +13,14 @@ import Vision
 
 class ViewController: UIViewController {
     
-    var customView: UIView = UIView(frame: CGRect(x: 50, y: 50, width: 10, height: 10))
+    var noiseView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+    var leftEyeView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+    var rightEyeView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+    var leftShoulder: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+    var rightShoulder: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+    
+    @IBOutlet private var previewImageView: UIImageView!
+
     @IBOutlet weak var videoPreview: UIView!
     var videoCapture: VideoCapture!
     
@@ -22,7 +29,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customView.backgroundColor = .red
+        
+        noiseView.backgroundColor = .red
+        leftEyeView.backgroundColor = .orange
+        rightEyeView.backgroundColor = .yellow
+        leftShoulder.backgroundColor = .green
+        rightShoulder.backgroundColor = .cyan
+        
+        self.view.addSubview(noiseView)
+        self.view.addSubview(leftEyeView)
+        self.view.addSubview(rightEyeView)
+        self.view.addSubview(leftShoulder)
+        self.view.addSubview(rightShoulder)
+        
         do {
             poseNet = try PoseNet()
         } catch {
@@ -32,7 +51,7 @@ class ViewController: UIViewController {
         self.poseNet?.delegate = self
         
         self.setUpCamera()
-        self.view.addSubview(customView)
+        
     }
 
     func setUpCamera() {
@@ -57,7 +76,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: VideoCaptureDelegate {
-    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame: CVPixelBuffer, timestamp: CMTime, image: CGImage?) {
+    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame: CVPixelBuffer, image: CGImage?) {
         if let value = image {
             poseNet?.predict(image: value)
             self.currentFrame = image
@@ -74,28 +93,46 @@ extension ViewController: PoseNetDelegate {
         let poseBuilder = PoseBuilder(output: prediction, configuration: poseBuilderConfiguration, inputImage: currentFrame)
         
         let poses = [poseBuilder.pose]
+
+        let dstImageSize = CGSize(width: currentFrame.width, height: currentFrame.height)
+        let dstImageFormat = UIGraphicsImageRendererFormat()
+
+        let ratio = self.view.frame.size.width / dstImageSize.width
+
+        dstImageFormat.scale = 1
+        let renderer = UIGraphicsImageRenderer(size: dstImageSize,
+                                               format: dstImageFormat)
         
-        for (index, pose) in poses.enumerated() {
-            for joint in pose.joints where joint.value.isValid {
+        let dstImage = renderer.image { rendererContext in
+            
+            for pose in poses {
                 
-                //print(joint.value.confidence)
-                //print("\(index) : \(joint.value.name) : \(joint.value.position)")
-                if joint.value.name == .nose {
-                    print("\(index) : \(joint.value.name) : \(joint.value.position)")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                        self.customView.center = joint.value.position
-                        self.customView.layoutIfNeeded()
+                for joint in pose.joints.values.filter({ $0.isValid }) {
+
+                    let cgContext = rendererContext.cgContext
+                    cgContext.setFillColor(UIColor.red.cgColor)
+                    
+                    let rectangle = CGRect(x: joint.position.x * ratio, y: joint.position.y + (abs(dstImageSize.height - self.view.frame.size.height)) ,
+                                           width: 3 * 2, height: 3 * 2)
+                    if joint.name == .nose {
+                        self.noiseView.frame = rectangle
+                    }
+                    if joint.name == .leftEye {
+                        self.leftEyeView.frame = rectangle
+                    }
+                    if joint.name == .rightEye {
+                        self.rightEyeView.frame = rectangle
+                    }
+                    if joint.name == .rightShoulder {
+                        self.rightShoulder.frame = rectangle
+                    }
+                    if joint.name == .leftShoulder {
+                        self.leftShoulder.frame = rectangle
                     }
                 }
-
             }
         }
-        
-//        
-//        if poses[0].confidence > 0.8 {
-//            print("x : \(poses[0].joints[.leftAnkle]?.position.x)")
-//            print("y : \(poses[0].joints[.leftAnkle]?.position.y)")
-//        }
+        self.previewImageView.image = dstImage
     }
     
 }

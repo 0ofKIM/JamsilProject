@@ -76,4 +76,13 @@ struct Pose {
         return Pose.edges.first(where: { $0.parent == parentJointName && $0.child == childJointName })
     }
     
+    subscript(jointName: Joint.Name) -> Joint {
+        get {
+            assert(joints[jointName] != nil)
+            return joints[jointName]!
+        }
+        set {
+            joints[jointName] = newValue
+        }
+    }
 }

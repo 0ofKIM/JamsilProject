@@ -12,7 +12,7 @@ import UIKit
 import VideoToolbox
 
 public protocol VideoCaptureDelegate: class {
-    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame: CVPixelBuffer, timestamp: CMTime, image: CGImage?)
+    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame: CVPixelBuffer, image: CGImage?)
 }
 
 public class VideoCapture: NSObject {
@@ -61,7 +61,7 @@ public class VideoCapture: NSObject {
         self.previewLayer = previewLayer
         
         let settings: [String : Any] = [
-            kCVPixelBufferPixelFormatTypeKey as String: NSNumber(value: kCVPixelFormatType_32BGRA),
+            kCVPixelBufferPixelFormatTypeKey as String: NSNumber(value: kCVPixelFormatType_420YpCbCr8BiPlanarFullRange),
         ]
         
         videoOutput.videoSettings = settings
@@ -100,19 +100,27 @@ public class VideoCapture: NSObject {
 
 extension VideoCapture: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        // Because lowering the capture device's FPS looks ugly in the preview,
-        // we capture at full speed but only call the delegate at its desired
-        // framerate.
-        let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
-        let deltaTime = timestamp - lastTimestamp
-        if deltaTime >= CMTimeMake(value: 1, timescale: Int32(fps)) {
-            lastTimestamp = timestamp
-        }
+        guard let delegate = delegate else { return }
 
-        var image: CGImage?
-        if let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
-            VTCreateCGImageFromCVPixelBuffer(imageBuffer, options: nil, imageOut: &image)
-            delegate?.videoCapture(self, didCaptureVideoFrame: imageBuffer, timestamp: timestamp, image: image)
+        if let pixelBuffer = sampleBuffer.imageBuffer {
+            // Attempt to lock the image buffer to gain access to its memory.
+            guard CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly) == kCVReturnSuccess
+                else {
+                    return
+            }
+
+            // Create Core Graphics image placeholder.
+            var image: CGImage?
+
+            // Create a Core Graphics bitmap image from the pixel buffer.
+            VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &image)
+
+            // Release the image buffer.
+            CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
+
+            DispatchQueue.main.sync {
+                delegate.videoCapture(self, didCaptureVideoFrame: pixelBuffer, image: image)
+            }
         }
     }
     
