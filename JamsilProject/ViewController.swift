@@ -27,6 +27,8 @@ class ViewController: UIViewController {
     private var poseNet: PoseNet?
     private var currentFrame: CGImage?
     
+    private var ageNet: AgeNetManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,11 +46,13 @@ class ViewController: UIViewController {
         
         do {
             poseNet = try PoseNet()
+            ageNet = try AgeNetManager()
         } catch {
             fatalError("Failed to load model. \(error.localizedDescription)")
         }
         
         self.poseNet?.delegate = self
+        self.ageNet?.delegate = self
         
         self.setUpCamera()
         
@@ -80,6 +84,9 @@ extension ViewController: VideoCaptureDelegate {
         if let value = image {
             poseNet?.predict(image: value)
             self.currentFrame = image
+            
+            let ciImage = CIImage(cgImage: value)
+            ageNet?.requestAge(ciImage: ciImage)
         }
     }
 }
@@ -135,4 +142,11 @@ extension ViewController: PoseNetDelegate {
         self.previewImageView.image = dstImage
     }
     
+}
+
+extension ViewController: AgeNetManagerDelegate {
+    func ageNet(age: String, confidence: Int) {
+        print("추정나이 : \(age)")
+        print("정확도 : \(confidence)")
+    }
 }
