@@ -29,6 +29,8 @@ class ViewController: UIViewController {
     
     private var ageNet: AgeNetManager?
     
+    private var genderNet: GenderNetManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,12 +49,14 @@ class ViewController: UIViewController {
         do {
             poseNet = try PoseNet()
             ageNet = try AgeNetManager()
+            genderNet = try GenderNetManager()
         } catch {
             fatalError("Failed to load model. \(error.localizedDescription)")
         }
         
         self.poseNet?.delegate = self
         self.ageNet?.delegate = self
+        self.genderNet?.delegate = self
         
         self.setUpCamera()
         
@@ -87,6 +91,7 @@ extension ViewController: VideoCaptureDelegate {
             
             let ciImage = CIImage(cgImage: value)
             ageNet?.requestAge(ciImage: ciImage)
+            genderNet?.requestAge(ciImage: ciImage)
         }
     }
 }
@@ -148,5 +153,11 @@ extension ViewController: AgeNetManagerDelegate {
     func ageNet(age: String, confidence: Int) {
         print("추정나이 : \(age)")
         print("정확도 : \(confidence)")
+    }
+}
+
+extension ViewController: GenderNetManagerDelegate {
+    func genderNet(gender: String) {
+        print("추정성별 : \(gender)")
     }
 }

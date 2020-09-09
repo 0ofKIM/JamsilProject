@@ -146,7 +146,7 @@ struct PoseNetOutPut {
             let num = NSNumber.init(value: index)
             numbers.append(num)
         }
-        
+
         return heatMap[numbers].doubleValue
     }
     

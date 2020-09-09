@@ -10,6 +10,8 @@
 		4B8335932501D71E00A55897 /* PoseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8335922501D71D00A55897 /* PoseBuilder.swift */; };
 		4B8335952501DBC500A55897 /* Joint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8335942501DBC500A55897 /* Joint.swift */; };
 		4B8335972501DDD100A55897 /* Pose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8335962501DDD100A55897 /* Pose.swift */; };
+		4BB3D8AE25087AC0004D2B7D /* GenderClass 1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4BB3D8AD25087AC0004D2B7D /* GenderClass 1.mlmodel */; };
+		4BB3D8B025087AD6004D2B7D /* GenderNetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB3D8AF25087AD6004D2B7D /* GenderNetManager.swift */; };
 		4BB9EA7225076D8C00521044 /* AgeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4BB9EA7125076D8C00521044 /* AgeNet.mlmodel */; };
 		4BB9EA7825076E1500521044 /* AgeNetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB9EA7725076E1500521044 /* AgeNetManager.swift */; };
 		4BE82A962500D2AF007A2435 /* AVCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE82A952500D2AF007A2435 /* AVCapture.swift */; };
@@ -27,6 +29,8 @@
 		4B8335922501D71D00A55897 /* PoseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseBuilder.swift; sourceTree = "<group>"; };
 		4B8335942501DBC500A55897 /* Joint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joint.swift; sourceTree = "<group>"; };
 		4B8335962501DDD100A55897 /* Pose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pose.swift; sourceTree = "<group>"; };
+		4BB3D8AD25087AC0004D2B7D /* GenderClass 1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "GenderClass 1.mlmodel"; sourceTree = "<group>"; };
+		4BB3D8AF25087AD6004D2B7D /* GenderNetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderNetManager.swift; sourceTree = "<group>"; };
 		4BB9EA7125076D8C00521044 /* AgeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = AgeNet.mlmodel; sourceTree = "<group>"; };
 		4BB9EA7725076E1500521044 /* AgeNetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeNetManager.swift; sourceTree = "<group>"; };
 		4BE82A952500D2AF007A2435 /* AVCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCapture.swift; sourceTree = "<group>"; };
@@ -59,6 +63,31 @@
 				4B8335922501D71D00A55897 /* PoseBuilder.swift */,
 			);
 			path = PoseBuilder;
+			sourceTree = "<group>";
+		};
+		4BB3D8AA25087A9E004D2B7D /* Gender */ = {
+			isa = PBXGroup;
+			children = (
+				4BB3D8AB25087AAA004D2B7D /* GenderModel */,
+				4BB3D8AC25087AB0004D2B7D /* GenderNet */,
+			);
+			path = Gender;
+			sourceTree = "<group>";
+		};
+		4BB3D8AB25087AAA004D2B7D /* GenderModel */ = {
+			isa = PBXGroup;
+			children = (
+				4BB3D8AD25087AC0004D2B7D /* GenderClass 1.mlmodel */,
+			);
+			path = GenderModel;
+			sourceTree = "<group>";
+		};
+		4BB3D8AC25087AB0004D2B7D /* GenderNet */ = {
+			isa = PBXGroup;
+			children = (
+				4BB3D8AF25087AD6004D2B7D /* GenderNetManager.swift */,
+			);
+			path = GenderNet;
 			sourceTree = "<group>";
 		};
 		4BB9EA7325076DB900521044 /* Pose */ = {
@@ -144,6 +173,7 @@
 				FB59008724F0E06000591CAB /* AppDelegate.swift */,
 				FB59008924F0E06000591CAB /* SceneDelegate.swift */,
 				FB59008B24F0E06000591CAB /* ViewController.swift */,
+				4BB3D8AA25087A9E004D2B7D /* Gender */,
 				4BB9EA7425076DC700521044 /* Age */,
 				4BB9EA7325076DB900521044 /* Pose */,
 				4BE82A972500D2C5007A2435 /* AVCapture */,
@@ -227,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB59008C24F0E06000591CAB /* ViewController.swift in Sources */,
+				4BB3D8AE25087AC0004D2B7D /* GenderClass 1.mlmodel in Sources */,
 				4BB9EA7825076E1500521044 /* AgeNetManager.swift in Sources */,
 				4BE82A962500D2AF007A2435 /* AVCapture.swift in Sources */,
 				4B8335952501DBC500A55897 /* Joint.swift in Sources */,
@@ -236,6 +267,7 @@
 				4BB9EA7225076D8C00521044 /* AgeNet.mlmodel in Sources */,
 				4B8335972501DDD100A55897 /* Pose.swift in Sources */,
 				4BE82AA62500DA0C007A2435 /* PoseNetMobileNet075S16FP16.mlmodel in Sources */,
+				4BB3D8B025087AD6004D2B7D /* GenderNetManager.swift in Sources */,
 				FB59008A24F0E06000591CAB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
